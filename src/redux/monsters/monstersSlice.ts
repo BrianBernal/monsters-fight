@@ -27,7 +27,13 @@ export const { setComputerMonsterId, setPlayerMonsterId } =
 
 // selectors:
 // Other code such as selectors can use the imported `RootState` type
-export const selectedPlayerMonsterId = (state: RootState) =>
-  state.monsters.playerMonsterId;
-export const selectedComputerMonsterId = (state: RootState) =>
-  state.monsters.computerMonsterId;
+export const selectedPlayerMonsterId = ({ monsters }: RootState) => {
+  return monsters.list.find(
+    (monster) => monster.id === monsters.playerMonsterId
+  );
+};
+export const selectedComputerMonsterId = ({ monsters }: RootState) => {
+  return monsters.list.find(
+    (monster) => monster.id === monsters.computerMonsterId
+  );
+};
