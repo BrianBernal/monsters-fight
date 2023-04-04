@@ -1,0 +1,9 @@
+.detail-card {
+  width: 307px;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-weight: 400;
+  }
+}

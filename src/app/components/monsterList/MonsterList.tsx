@@ -4,7 +4,7 @@ import reactLogo from "@/assets/react.svg";
 
 function MonsterList() {
   return (
-    <div className="card">
+    <div className="box card">
       <img src={reactLogo} className="card__img" alt="React logo" />
       <span>Image Title</span>
     </div>
