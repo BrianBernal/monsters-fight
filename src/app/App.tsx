@@ -1,8 +1,9 @@
 // styles
 import "./App.scss";
+import Home from "./pages/Home";
 
 function App() {
-  return <div className="App">initial app</div>;
+  return <Home />;
 }
 
 export default App;
