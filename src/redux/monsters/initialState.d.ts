@@ -1,4 +1,4 @@
-interface monster {
+type monster = {
   id: string;
   name: string;
   attack: number;
@@ -7,7 +7,7 @@ interface monster {
   speed: number;
   type: string;
   imageUrl: string;
-}
+};
 
 const monsters: Array<monster> = [
   {
