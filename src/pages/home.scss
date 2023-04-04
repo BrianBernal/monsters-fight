@@ -1,0 +1,17 @@
+.battle-container {
+  margin: 0 auto;
+  max-width: 814px;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-weight: 400;
+    font-size: 36px;
+  }
+
+  &__subtitle {
+    margin-bottom: 1rem;
+    font-weight: 400;
+    font-size: 24px;
+  }
+}

@@ -1,4 +1,9 @@
 .boxing-ring {
   display: flex;
   justify-content: space-between;
+  margin: 3rem 0;
+
+  &__start-button {
+    align-self: center;
+  }
 }
