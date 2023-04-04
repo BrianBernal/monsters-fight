@@ -16,7 +16,7 @@ function MonsterDetail({ monster }: TMonsterDetail) {
   return (
     <article className="box detail-card">
       <img src={reactLogo} className="card__img" alt="React logo" />
-      <span className="detail-card__title">{monster.name}</span>
+      <span className="detail-card__title">{name}</span>
     </article>
   );
 }
