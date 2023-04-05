@@ -1,10 +1,10 @@
 // styles
-import { monster } from "@/redux/monsters/initialState";
+import { TMonster } from "@/redux/monsters/initialState";
 import "./monsterDetail.scss";
 import reactLogo from "@/assets/react.svg";
 
 type TMonsterDetail = {
-  monster: monster | undefined;
+  monster: TMonster | undefined;
 };
 
 function MonsterDetail({ monster }: TMonsterDetail) {

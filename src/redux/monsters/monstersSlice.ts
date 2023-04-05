@@ -25,6 +25,44 @@ const fetchMonsters = createAsyncThunk(
   }
 );
 
+const fetchBattle = createAsyncThunk<
+  { winnerId: string; looserId: string },
+  void,
+  { state: RootState }
+>(
+  "monsters/fetchBattle",
+  async (_, { getState }): Promise<{ winnerId: string; looserId: string }> => {
+    try {
+      const {
+        monsters: { playerMonsterId, computerMonsterId },
+      } = getState();
+      if (!playerMonsterId || !computerMonsterId) {
+        throw new Error("Missing opponents IDs");
+      }
+      const body = {
+        playerMonsterId,
+        computerMonsterId,
+      };
+      const response = await fetch("http://localhost:4000/getWinner", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const dataResponse = await response.json();
+      if (!response.ok) {
+        throw new Error(
+          dataResponse.message || response.statusText || "Connection error"
+        );
+      }
+      return dataResponse.data;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+);
+
 const monsterSlice = createSlice({
   name: "monsters",
   // `createSlice` will infer the state type from the `initialState` argument
@@ -45,10 +83,24 @@ const monsterSlice = createSlice({
       .addCase(fetchMonsters.fulfilled, (state, action) => {
         state.list = action.payload;
         state.status = "succeeded";
+        state.error = null;
       })
       .addCase(fetchMonsters.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "Unknown error";
+      })
+      .addCase(fetchBattle.pending, (state) => {
+        state.fightResult.status = "loading";
+      })
+      .addCase(fetchBattle.fulfilled, (state, action) => {
+        state.fightResult.status = "succeeded";
+        state.fightResult.winnerId = action.payload.winnerId;
+        state.fightResult.looserId = action.payload.looserId;
+        state.fightResult.error = null;
+      })
+      .addCase(fetchBattle.rejected, (state, action) => {
+        state.fightResult.status = "failed";
+        state.fightResult.error = action.error.message || "Unknown error";
       });
   },
 });
@@ -68,5 +120,5 @@ const selectedComputerMonsterId = ({ monsters }: RootState) => {
 
 export default monsterSlice.reducer;
 export const { setPlayerMonsterId } = monsterSlice.actions;
-export { fetchMonsters };
+export { fetchMonsters, fetchBattle };
 export { selectedPlayerMonsterId, selectedComputerMonsterId };

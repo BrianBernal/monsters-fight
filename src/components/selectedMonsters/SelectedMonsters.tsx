@@ -1,6 +1,7 @@
 // redux
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
+  fetchBattle,
   selectedComputerMonsterId,
   selectedPlayerMonsterId,
 } from "@/redux/monsters/monstersSlice";
@@ -14,11 +15,22 @@ import "./selectedMonsters.scss";
 function SelectedMonsters() {
   const playerMonster = useAppSelector(selectedPlayerMonsterId);
   const computerMonster = useAppSelector(selectedComputerMonsterId);
+  const dispatch = useAppDispatch();
+
+  const startBattleButtonHandler = () => {
+    dispatch(fetchBattle());
+  };
 
   return (
     <section className="boxing-ring">
       <MonsterDetail monster={playerMonster} />
-      <button className="boxing-ring__start-button">Start Battle</button>
+      <button
+        onClick={startBattleButtonHandler}
+        className="boxing-ring__start-button"
+        disabled={!playerMonster}
+      >
+        Start Battle
+      </button>
       <MonsterDetail monster={computerMonster} />
     </section>
   );

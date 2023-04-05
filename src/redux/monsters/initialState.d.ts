@@ -9,12 +9,20 @@ type TMonster = {
   imageUrl: string;
 };
 
+type requestStatus = "idle" | "loading" | "succeeded" | "failed";
+
 type initialState = {
-  list: monster[];
+  status: requestStatus;
+  error: string | null;
+  list: TMonster[];
   playerMonsterId: string;
   computerMonsterId: string;
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
+  fightResult: {
+    status: requestStatus;
+    error: string | null;
+    winnerId: string;
+    looserId: string;
+  };
 };
 
 const initialState: initialState = {
@@ -23,8 +31,15 @@ const initialState: initialState = {
   computerMonsterId: "",
   status: "idle",
   error: null,
+  fightResult: {
+    status: "idle",
+    error: null,
+    winnerId: "",
+    looserId: "",
+  },
 };
 
 export default initialState;
 
 export type { TMonster };
+export { requestStatus };
