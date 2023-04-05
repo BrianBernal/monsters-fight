@@ -1,20 +1,37 @@
 // redux
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setPlayerMonsterId } from "@/redux/monsters/monstersSlice";
+import {
+  fetchMonsters,
+  setPlayerMonsterId,
+} from "@/redux/monsters/monstersSlice";
 
 // styles
 import "./monsterList.scss";
 import reactLogo from "@/assets/react.svg";
+import { useEffect } from "react";
 
 function MonsterList() {
-  const monsters = useAppSelector((state) => state.monsters.list);
+  const {
+    list: monsters,
+    error,
+    status,
+  } = useAppSelector((state) => state.monsters);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchMonsters());
+    }
+  }, []);
 
   const handlePlayerSelector = (selectedId: string) => {
     return () => {
       dispatch(setPlayerMonsterId(selectedId));
     };
   };
+
+  if (error) return <p>Monsters Not Found!</p>;
+  if (status === "loading") return <p>Loading...</p>;
 
   return (
     <section className="monster-list">
