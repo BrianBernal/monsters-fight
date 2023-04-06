@@ -25,13 +25,13 @@ const fetchMonsters = createAsyncThunk(
   }
 );
 
-const fetchBattle = createAsyncThunk<
-  { winnerId: string; looserId: string },
-  void,
-  { state: RootState }
->(
+type TFighters = {
+  winnerId: string;
+  looserId: string;
+};
+const fetchBattle = createAsyncThunk<TFighters, void, { state: RootState }>(
   "monsters/fetchBattle",
-  async (_, { getState }): Promise<{ winnerId: string; looserId: string }> => {
+  async (_, { getState }): Promise<TFighters> => {
     try {
       const {
         monsters: { playerMonsterId, computerMonsterId },
