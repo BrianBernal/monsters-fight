@@ -23,7 +23,7 @@ function SelectedMonsters() {
 
   return (
     <section className="boxing-ring">
-      <MonsterDetail monster={playerMonster} />
+      <MonsterDetail monster={playerMonster} emptyMessage="Player" />
       <button
         onClick={startBattleButtonHandler}
         className="boxing-ring__start-button"
@@ -31,7 +31,7 @@ function SelectedMonsters() {
       >
         Start Battle
       </button>
-      <MonsterDetail monster={computerMonster} />
+      <MonsterDetail monster={computerMonster} emptyMessage="Computer" />
     </section>
   );
 }

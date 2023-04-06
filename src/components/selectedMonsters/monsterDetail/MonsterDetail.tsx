@@ -4,12 +4,13 @@ import "./monsterDetail.scss";
 import reactLogo from "@/assets/react.svg";
 
 type TMonsterDetail = {
+  emptyMessage: string;
   monster: TMonster | undefined;
 };
 
-function MonsterDetail({ monster }: TMonsterDetail) {
+function MonsterDetail({ monster, emptyMessage }: TMonsterDetail) {
   if (!monster) {
-    return <article>Monster not available</article>;
+    return <article className="box detail-card">{emptyMessage}</article>;
   }
   const { name } = monster;
 
