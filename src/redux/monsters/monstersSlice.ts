@@ -71,12 +71,16 @@ const monsterSlice = createSlice({
     // Use the PayloadAction type to declare the contents of `action.payload`
     setPlayerMonsterId: (state, action: PayloadAction<string>) => {
       state.playerMonsterId = action.payload;
-      const randomIndex = getRandomInt(state.list.length);
+      const playerMonsterIndex = state.list.findIndex(
+        (monster) => monster.id === action.payload
+      );
+      const randomIndex = getRandomInt(state.list.length, [playerMonsterIndex]);
       state.computerMonsterId = state.list[randomIndex].id;
     },
   },
   extraReducers(builder) {
     builder
+      // Monsters List
       .addCase(fetchMonsters.pending, (state) => {
         state.status = "loading";
       })
@@ -89,6 +93,7 @@ const monsterSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message || "Unknown error";
       })
+      // Monsters Battle
       .addCase(fetchBattle.pending, (state) => {
         state.fightResult.status = "loading";
       })

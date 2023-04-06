@@ -24,8 +24,9 @@ app.get("/getMonsters", (_req, res) => {
 
 app.post("/getWinner", jsonParser, (req, res) => {
   const { playerMonsterId = "", computerMonsterId = "" } = req.body;
-  if (!playerMonsterId || !computerMonsterId) {
-    res.status(400).send({ error: "Error in params" });
+  const areSameIds = playerMonsterId === computerMonsterId;
+  if (!playerMonsterId || !computerMonsterId || areSameIds) {
+    res.status(402).send({ error: "Error in params" });
   }
   const fighters = [playerMonsterId, computerMonsterId];
   const randomWinner = Math.floor(Math.random() * 2);
