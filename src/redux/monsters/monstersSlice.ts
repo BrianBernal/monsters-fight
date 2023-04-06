@@ -43,13 +43,17 @@ const fetchBattle = createAsyncThunk<TFighters, void, { state: RootState }>(
         playerMonsterId,
         computerMonsterId,
       };
-      const response = await fetch("http://localhost:4000/getWinner", {
+      const fetchOptions = {
         method: "POST",
+        body: JSON.stringify(body),
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
-      });
+      };
+      const response = await fetch(
+        "http://localhost:4000/getWinner",
+        fetchOptions
+      );
       const dataResponse = await response.json();
       if (!response.ok) {
         throw new Error(
@@ -76,6 +80,7 @@ const monsterSlice = createSlice({
       );
       const randomIndex = getRandomInt(state.list.length, [playerMonsterIndex]);
       state.computerMonsterId = state.list[randomIndex].id;
+      state.fightResult = initialState.fightResult;
     },
   },
   extraReducers(builder) {
@@ -123,7 +128,15 @@ const selectedComputerMonsterId = ({ monsters }: RootState) => {
   );
 };
 
+const monsterWinner = ({ monsters }: RootState) => {
+  const winner = monsters.list.find((monster) => {
+    return monster.id === monsters.fightResult.winnerId;
+  });
+
+  return winner;
+};
+
 export default monsterSlice.reducer;
 export const { setPlayerMonsterId } = monsterSlice.actions;
 export { fetchMonsters, fetchBattle };
-export { selectedPlayerMonsterId, selectedComputerMonsterId };
+export { selectedPlayerMonsterId, selectedComputerMonsterId, monsterWinner };
