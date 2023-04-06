@@ -1,14 +1,7 @@
-// libraries
 import { Provider } from "react-redux";
-
-// components
-import Home from "../pages/Home";
-
-// redux
-import store from "@/redux/store";
-
-// styles
 import "./App.scss";
+import store from "@/redux/store";
+import Home from "./pages/Home";
 
 function App() {
   return (
