@@ -9,7 +9,7 @@ export default defineConfig({
     alias: [{ find: "@", replacement: "/src" }],
   },
   test: {
-    globals: true,
+    globals: true, // So you do not need to import jest tools like 'describe'
     environment: "happy-dom",
     // setupFiles: ["src/setupTest.ts"],
   },
