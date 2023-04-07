@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`<BarIndicator /> > Renders correctly 1`] = `
+<div
+  className="indicator-container"
+>
+  <span>
+    example title
+  </span>
+  <span
+    className="indicator-container__bar"
+  >
+    <span
+      className="indicator-container__bar__filler"
+      style={
+        {
+          "width": "90%",
+        }
+      }
+    />
+  </span>
+</div>
+`;
