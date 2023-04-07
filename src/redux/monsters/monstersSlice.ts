@@ -137,6 +137,7 @@ const monsterWinner = ({ monsters }: RootState) => {
 };
 
 export default monsterSlice.reducer;
+
 export const { setPlayerMonsterId } = monsterSlice.actions;
-export { fetchMonsters, fetchBattle };
-export { selectedPlayerMonsterId, selectedComputerMonsterId, monsterWinner };
+export { fetchMonsters, fetchBattle }; // async actions
+export { selectedPlayerMonsterId, selectedComputerMonsterId, monsterWinner }; // selectors

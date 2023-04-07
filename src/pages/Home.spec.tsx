@@ -1,20 +1,16 @@
 // libraries
-import { describe, test } from "vitest";
-import { render } from "@testing-library/react";
+import { describe, test, expect } from "vitest";
 import "@testing-library/jest-dom";
-import { Provider } from "react-redux";
-import store from "@/redux/store";
+import { screen } from "@testing-library/react";
 
+// components
 import Home from "./Home";
+import renderWithProviders from "@/utils/test-utils";
 
 describe("<Home />", () => {
   test("Render title and subtitle", () => {
-    const appComponent = render(
-      <Provider store={store}>
-        <Home />
-      </Provider>
-    );
-    appComponent.getByText("Battle of Monsters");
-    appComponent.getByText("Select your monster");
+    renderWithProviders(<Home />);
+    expect(screen.getByText("Battle of Monsters")).toBeInTheDocument();
+    expect(screen.getByText("Select your monster")).toBeInTheDocument();
   });
 });
