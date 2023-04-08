@@ -11,12 +11,12 @@ import reactLogo from "@/assets/react.svg";
 import { useEffect } from "react";
 
 function MonsterList() {
+  const dispatch = useAppDispatch();
   const {
     list: monsters,
     error,
     status,
   } = useAppSelector((state) => state.monsters);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (status === "idle") {

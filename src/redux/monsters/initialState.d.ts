@@ -11,7 +11,7 @@ type TMonster = {
 
 type requestStatus = "idle" | "loading" | "succeeded" | "failed";
 
-type initialState = {
+type TInitialState = {
   status: requestStatus;
   error: string | null;
   list: TMonster[];
@@ -25,7 +25,7 @@ type initialState = {
   };
 };
 
-const initialState: initialState = {
+const initialState: TInitialState = {
   list: [],
   playerMonsterId: "",
   computerMonsterId: "",

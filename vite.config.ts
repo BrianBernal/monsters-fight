@@ -11,6 +11,6 @@ export default defineConfig({
   test: {
     globals: true, // So you do not need to import jest tools like 'describe'
     environment: "happy-dom",
-    // setupFiles: ["src/setupTest.ts"],
+    setupFiles: ["./src/utils/setupVitest.ts"],
   },
 });
