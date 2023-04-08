@@ -7,29 +7,24 @@ import renderWithProviders from "@/utils/test-utils";
 import MonsterList from "./MonsterList";
 import { fetchMocker } from "@/utils/setupVitest";
 import initialState from "@/redux/monsters/initialState.d";
+import { monsters } from "@/utils/mockData";
+import { RootState } from "@/redux/store";
 
-const stateWithMonsterList = { monsters: { ...initialState } };
-stateWithMonsterList.monsters.list = [
-  {
-    id: "id1",
-    name: "Monster 1",
-    attack: 20,
-    defense: 30,
-    hp: 100,
-    speed: 50,
-    type: "Type1",
-    imageUrl: "url",
-  },
-];
-stateWithMonsterList.monsters.status = "succeeded";
+const stateWithMonsterList: RootState = {
+  monsters: { ...initialState, list: monsters, status: "succeeded" },
+};
 
 describe("<MonsterList /> happy paths", () => {
   test("Render list with preloaded initial data", async () => {
-    const listComponent = renderWithProviders(<MonsterList />, {
-      preloadedState: stateWithMonsterList,
-    });
+    const ExtendedRenderOptions = { preloadedState: stateWithMonsterList };
+    const listComponent = renderWithProviders(
+      <MonsterList />,
+      ExtendedRenderOptions
+    );
     await waitFor(() =>
-      expect(listComponent.getByAltText("React logo")).toBeInTheDocument()
+      expect(
+        listComponent.getAllByAltText("React logo").length
+      ).toBeGreaterThan(0)
     );
   });
 
