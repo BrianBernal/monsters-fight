@@ -21,7 +21,7 @@ const stateWithMonsterList: RootState = {
 };
 
 describe("<SelectedMonster />", () => {
-  test("Initial disabled button", () => {
+  test("Initial disabled Start battle button", () => {
     const selectedMonsterComponent = renderWithProviders(<SelectedMonsters />);
     const button = selectedMonsterComponent.getByText("Start Battle");
     expect(button).toBeDisabled();
