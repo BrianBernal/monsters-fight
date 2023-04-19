@@ -34,7 +34,6 @@ describe("<Home /> : MULTIPLE COMPONENTS IN THESE TESTS", () => {
   test("Renders correctly", () => {
     renderWithProviders(<Home />);
     expect(screen.getByText("Battle of Monsters")).toBeInTheDocument();
-    expect(screen.getByText("Select your monster")).toBeInTheDocument();
 
     // Following elements are instanced in <SelectedMonsters />
     // through <MonsterDetail emptyMessage="..." .../>

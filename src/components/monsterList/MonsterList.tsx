@@ -24,7 +24,7 @@ function MonsterList() {
       return "Loading...";
     }
     if (error) {
-      return "No monsters available";
+      return "Monsters not found!";
     }
     const message =
       monsters.length > 0 ? "Select your monster" : "No monsters available";

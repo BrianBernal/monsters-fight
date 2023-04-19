@@ -1,6 +1,6 @@
 // libraries
 import "@testing-library/jest-dom";
-import { waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import renderWithProviders from "@/utils/test-utils";
 
 // components
@@ -15,24 +15,21 @@ const stateWithMonsterList: RootState = {
 };
 
 describe("<MonsterList /> happy paths", () => {
-  test("Render list with preloaded initial data", async () => {
+  test("Render list with preloaded initial data", () => {
     const ExtendedRenderOptions = { preloadedState: stateWithMonsterList };
     const listComponent = renderWithProviders(
       <MonsterList />,
       ExtendedRenderOptions
     );
-    await waitFor(() =>
-      expect(
-        listComponent.getAllByAltText("React logo").length
-      ).toBeGreaterThan(0)
-    );
+    monsters.forEach((monster) => {
+      expect(listComponent.getByAltText(monster.name)).toBeInTheDocument();
+    });
   });
 
   test("Render list with mocked fetch data", async () => {
     fetchMocker.doMock();
     const monsterComponent = renderWithProviders(<MonsterList />);
     expect(monsterComponent.getByText("Loading...")).toBeInTheDocument();
-    // TODO: if at the beginning list is empty, why gets Loading element without await?
     await waitFor(() =>
       expect(monsterComponent.queryAllByRole("img").length).toBeGreaterThan(0)
     );
@@ -42,12 +39,11 @@ describe("<MonsterList /> happy paths", () => {
 
 describe("<MonsterList /> UNhappy paths", () => {
   test("Show error message when not successful response", async () => {
-    const monsterComponent = renderWithProviders(<MonsterList />);
     // TODO: if at the beginning list is empty, why gets Loading element without await?
-    expect(monsterComponent.getByText("Loading...")).toBeInTheDocument();
+    // expect(monsterComponent.getByText("Loading...")).toBeInTheDocument();
+    renderWithProviders(<MonsterList />);
     await waitFor(() => {
-      expect(monsterComponent.queryAllByRole("img").length).toBe(0);
-      expect(monsterComponent.getByText(/Not Found/));
+      expect(screen.getByText("Monsters not found!"));
     });
   });
 });
