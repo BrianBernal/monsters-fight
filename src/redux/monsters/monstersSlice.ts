@@ -17,7 +17,6 @@ const fetchMonsters = createAsyncThunk(
           dataResponse.message || response.statusText || "Connection error"
         );
       }
-      // await new Promise((resolve) => setTimeout(resolve, 2000));
       return dataResponse.data;
     } catch (err) {
       return Promise.reject(err);

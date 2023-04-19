@@ -7,7 +7,6 @@ import {
 
 // styles
 import "./monsterList.scss";
-import reactLogo from "@/assets/react.svg";
 import { useEffect } from "react";
 
 function MonsterList() {
@@ -42,9 +41,9 @@ function MonsterList() {
           className="box monster-list__card"
         >
           <img
-            src={reactLogo}
+            src={monster.imageUrl}
             className="monster-list__card__img"
-            alt="React logo"
+            alt={monster.name}
           />
           <span>{monster.name}</span>
         </div>

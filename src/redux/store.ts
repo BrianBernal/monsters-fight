@@ -19,8 +19,9 @@ function setupStore(preloadedState?: PreloadedState<RootState>) {
   });
 }
 
-export default setupStore;
+type RootState = ReturnType<typeof rootReducer>;
+type AppStore = ReturnType<typeof setupStore>;
+type AppDispatch = AppStore["dispatch"];
 
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore["dispatch"];
+export default setupStore;
+export type { RootState, AppStore, AppDispatch };

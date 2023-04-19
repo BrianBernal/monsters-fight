@@ -1,8 +1,12 @@
 {
   "name": "monsters-fight",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
+  "author": {
+    "email": "brianbernal27@gmail.com",
+    "name": "Brian Bernal"
+  },
   "scripts": {
     "backend": "cd backend && node main.js",
     "install-backend": "cd backend && npm install",
