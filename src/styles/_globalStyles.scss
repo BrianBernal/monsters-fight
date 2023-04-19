@@ -2,8 +2,12 @@ html {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
-*,
-*::before,
-*::after {
+
+h1,
+p {
+  margin: 0;
+}
+
+* {
   box-sizing: inherit;
 }

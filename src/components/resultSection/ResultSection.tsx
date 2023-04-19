@@ -11,16 +11,22 @@ function ResultSection() {
     (state) => state.monsters.fightResult
   );
 
-  if (status === "loading") {
-    return <span className="no-result">Loading...</span>;
-  }
-  if (error) {
-    return <span className="no-result">This fight was not possible</span>;
-  }
-  if (!winner) {
-    return <span className="no-result" />;
-  }
-  return <section className="result-panel">{winner.name} Wins!</section>;
+  const getText = () => {
+    if (status === "loading") {
+      return "Loading...";
+    }
+    if (error) {
+      return "This fight was not possible";
+    }
+    if (winner?.name) {
+      return `${winner?.name} Wins!`;
+    }
+    return "";
+  };
+
+  const text = getText();
+
+  return text ? <p className="result-panel">{text}</p> : <></>;
 }
 
 export default ResultSection;

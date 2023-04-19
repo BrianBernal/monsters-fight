@@ -1,5 +1,6 @@
 .indicator-container {
-  padding: 11px 0;
+  margin-bottom: 11px;
+  font-size: 12px;
 
   &__bar {
     display: block;
@@ -15,6 +16,7 @@
       height: 8px;
       background: #00ff00;
       border-radius: 4px;
+      margin: 5px 0;
     }
   }
 }

@@ -1,3 +1,6 @@
+// libraries
+import { useEffect } from "react";
+
 // redux
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
@@ -7,7 +10,6 @@ import {
 
 // styles
 import "./monsterList.scss";
-import { useEffect } from "react";
 
 function MonsterList() {
   const dispatch = useAppDispatch();
@@ -16,6 +18,19 @@ function MonsterList() {
     error,
     status,
   } = useAppSelector((state) => state.monsters);
+
+  const getText = () => {
+    if (status === "loading") {
+      return "Loading...";
+    }
+    if (error) {
+      return "No monsters available";
+    }
+    const message =
+      monsters.length > 0 ? "Select your monster" : "No monsters available";
+
+    return message;
+  };
 
   useEffect(() => {
     if (status === "idle") {
@@ -29,26 +44,26 @@ function MonsterList() {
     };
   };
 
-  if (error) return <p>Monsters Not Found!</p>;
-  if (status === "loading") return <p>Loading...</p>;
-
   return (
-    <section className="monster-list">
-      {monsters.map((monster) => (
-        <div
-          key={monster.id}
-          onClick={handlePlayerSelector(monster.id)}
-          className="box monster-list__card"
-        >
-          <img
-            src={monster.imageUrl}
-            className="monster-list__card__img"
-            alt={monster.name}
-          />
-          <span>{monster.name}</span>
-        </div>
-      ))}
-    </section>
+    <>
+      <p className="monster-list__title">{getText()}</p>
+      <section className="monster-list">
+        {monsters.map((monster) => (
+          <div
+            key={monster.id}
+            onClick={handlePlayerSelector(monster.id)}
+            className="box monster-list__card"
+          >
+            <img
+              src={monster.imageUrl}
+              className="monster-list__card__img"
+              alt={monster.name}
+            />
+            <span>{monster.name}</span>
+          </div>
+        ))}
+      </section>
+    </>
   );
 }
 
