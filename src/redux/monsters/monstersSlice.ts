@@ -1,10 +1,13 @@
 // libraries
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
+// utils
+import { getRandomInt } from "@/utils/math";
+
 // redux
 import { RootState } from "../store";
-import initialState, { TBattleResult, TMonster } from "./initialState";
-import { getRandomInt } from "@/utils/math";
+import initialState from "./initialState";
+import { TBattleResult, TMonster } from "./models";
 
 const fetchMonsters = createAsyncThunk(
   "monsters/fetchMonsters",

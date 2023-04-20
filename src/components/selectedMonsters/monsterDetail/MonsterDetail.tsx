@@ -1,6 +1,10 @@
 // styles
-import { TMonster } from "@/redux/monsters/initialState";
 import "./monsterDetail.scss";
+
+//types
+import { TMonster } from "@/redux/monsters/models";
+
+// components
 import BarIndicator from "./barIndicator/BarIndicator";
 
 type TMonsterDetail = {
