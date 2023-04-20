@@ -17,6 +17,7 @@ function MonsterList() {
     list: monsters,
     error,
     status,
+    playerMonsterId,
   } = useAppSelector((state) => state.monsters);
 
   const getText = () => {
@@ -48,20 +49,25 @@ function MonsterList() {
     <>
       <p className="monster-list__title">{getText()}</p>
       <section className="monster-list">
-        {monsters.map((monster) => (
-          <div
-            key={monster.id}
-            onClick={handlePlayerSelector(monster.id)}
-            className="box monster-list__card"
-          >
-            <img
-              src={monster.imageUrl}
-              className="monster-list__card__img"
-              alt={monster.name}
-            />
-            <span>{monster.name}</span>
-          </div>
-        ))}
+        {monsters.map(({ id, imageUrl, name }) => {
+          const isSelected = id === playerMonsterId;
+          return (
+            <div
+              key={id}
+              onClick={handlePlayerSelector(id)}
+              className={`box monster-list__card${
+                isSelected ? " monster-list__card--selected" : ""
+              }`}
+            >
+              <img
+                src={imageUrl}
+                className="monster-list__card__img"
+                alt={name}
+              />
+              <span>{name}</span>
+            </div>
+          );
+        })}
       </section>
     </>
   );
