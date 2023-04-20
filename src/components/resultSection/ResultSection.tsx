@@ -26,7 +26,11 @@ function ResultSection() {
 
   const text = getText();
 
-  return text ? <p className="result-panel">{text}</p> : <></>;
+  return (
+    <p className={`result-panel ${text ? " result-panel--show" : ""}`}>
+      {text}
+    </p>
+  );
 }
 
 export default ResultSection;

@@ -1,10 +1,10 @@
+// styles
+import "./home.scss";
+
 // components
 import MonsterList from "@/components/monsterList/MonsterList";
 import SelectedMonsters from "@/components/selectedMonsters/SelectedMonsters";
 import ResultSection from "@/components/resultSection/ResultSection";
-
-// styles
-import "./home.scss";
 
 function Home() {
   return (

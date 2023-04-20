@@ -3,11 +3,12 @@
   max-width: 814px;
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  & > * {
+    margin-bottom: 35px;
+  }
 
   &__title {
     font-weight: 400;
     font-size: 36px;
-    margin: 0;
   }
 }
