@@ -6,7 +6,7 @@ import renderWithProviders from "@/utils/test-utils";
 // components
 import MonsterList from "./MonsterList";
 import { fetchMocker } from "@/utils/setupVitest";
-import initialState from "@/redux/monsters/initialState.d";
+import initialState from "@/redux/monsters/initialState";
 import { monsters } from "@/utils/mockData";
 import { RootState } from "@/redux/store";
 

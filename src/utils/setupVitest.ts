@@ -13,10 +13,7 @@ const responses = {
   [endpoints.getMonsters]: JSON.stringify({ ok: true, data: monsters }),
   [endpoints.getWinner]: JSON.stringify({
     ok: true,
-    data: {
-      winnerId: monsters[0].id,
-      looserId: monsters[1].id,
-    },
+    data: { winner: monsters[0], tie: false },
   }),
 };
 

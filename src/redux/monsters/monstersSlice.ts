@@ -3,7 +3,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 // redux
 import { RootState } from "../store";
-import initialState, { TBattleResult, TMonster } from "./initialState.d";
+import initialState, { TBattleResult, TMonster } from "./initialState";
 import { getRandomInt } from "@/utils/math";
 
 const fetchMonsters = createAsyncThunk(

@@ -36,11 +36,9 @@ const initialState: TInitialState = {
     status: "idle",
     error: null,
     detail: null,
-    looserId: "",
   },
 };
 
 export default initialState;
 
-export type { TMonster, TBattleResult };
-export { requestStatus };
+export type { TMonster, TBattleResult, requestStatus };

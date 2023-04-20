@@ -6,7 +6,7 @@ import renderWithProviders from "@/utils/test-utils";
 import SelectedMonsters from "./SelectedMonsters";
 
 // utils
-import initialState from "@/redux/monsters/initialState.d";
+import initialState from "@/redux/monsters/initialState";
 import { monsters } from "@/utils/mockData";
 import { RootState } from "@/redux/store";
 

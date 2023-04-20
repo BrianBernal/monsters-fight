@@ -9,7 +9,7 @@ import Home from "./Home";
 // utils
 import { fetchMocker } from "@/utils/setupVitest";
 import { RootState } from "@/redux/store";
-import initialState from "@/redux/monsters/initialState.d";
+import initialState from "@/redux/monsters/initialState";
 import { monsters } from "@/utils/mockData";
 
 const stateLoadedMonsters: RootState = {
@@ -65,7 +65,7 @@ describe("<Home /> : MULTIPLE COMPONENTS IN THESE TESTS", () => {
     expect(button).not.toBeDisabled();
     fireEvent.click(button);
     await waitFor(() => {
-      expect(getByText(/(\w*) Wins/)).toBeInTheDocument(); // Defined at ResultSection.tsx
+      expect(getByText(/(\w*) Wins!/)).toBeInTheDocument(); // Defined at ResultSection.tsx
     });
     fetchMocker.dontMock();
   });
