@@ -11,6 +11,8 @@ type TMonster = {
 
 type requestStatus = "idle" | "loading" | "succeeded" | "failed";
 
+type TBattleResult = { winner: TMonster; tie: boolean };
+
 type TInitialState = {
   status: requestStatus;
   error: string | null;
@@ -20,8 +22,7 @@ type TInitialState = {
   fightResult: {
     status: requestStatus;
     error: string | null;
-    winnerId: string;
-    looserId: string;
+    detail: TBattleResult | null;
   };
 };
 
@@ -34,12 +35,12 @@ const initialState: TInitialState = {
   fightResult: {
     status: "idle",
     error: null,
-    winnerId: "",
+    detail: null,
     looserId: "",
   },
 };
 
 export default initialState;
 
-export type { TMonster };
+export type { TMonster, TBattleResult };
 export { requestStatus };

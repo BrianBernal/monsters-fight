@@ -3,7 +3,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 // redux
 import { RootState } from "../store";
-import initialState, { TMonster } from "./initialState.d";
+import initialState, { TBattleResult, TMonster } from "./initialState.d";
 import { getRandomInt } from "@/utils/math";
 
 const fetchMonsters = createAsyncThunk(
@@ -24,13 +24,9 @@ const fetchMonsters = createAsyncThunk(
   }
 );
 
-type TFighters = {
-  winnerId: string;
-  looserId: string;
-};
-const fetchBattle = createAsyncThunk<TFighters, void, { state: RootState }>(
+const fetchBattle = createAsyncThunk<TBattleResult, void, { state: RootState }>(
   "monsters/fetchBattle",
-  async (_, { getState }): Promise<TFighters> => {
+  async (_, { getState }): Promise<TBattleResult> => {
     try {
       const {
         monsters: { playerMonsterId, computerMonsterId },
@@ -103,8 +99,7 @@ const monsterSlice = createSlice({
       })
       .addCase(fetchBattle.fulfilled, (state, action) => {
         state.fightResult.status = "succeeded";
-        state.fightResult.winnerId = action.payload.winnerId;
-        state.fightResult.looserId = action.payload.looserId;
+        state.fightResult.detail = action.payload;
         state.fightResult.error = null;
       })
       .addCase(fetchBattle.rejected, (state, action) => {
@@ -129,7 +124,7 @@ const selectedComputerMonsterId = ({ monsters }: RootState) => {
 
 const monsterWinner = ({ monsters }: RootState) => {
   const winner = monsters.list.find((monster) => {
-    return monster.id === monsters.fightResult.winnerId;
+    return monster.id === monsters.fightResult.detail?.winner.id;
   });
 
   return winner;
