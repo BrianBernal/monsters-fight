@@ -1,7 +1,7 @@
 // redux
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  fetchBattle,
+  fetchBattleAction,
   selectedComputerMonsterId,
   selectedPlayerMonsterId,
 } from "@/redux/monsters/monstersSlice";
@@ -18,7 +18,7 @@ function SelectedMonsters() {
   const dispatch = useAppDispatch();
 
   const startBattleButtonHandler = () => {
-    dispatch(fetchBattle());
+    dispatch(fetchBattleAction());
   };
 
   return (

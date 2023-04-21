@@ -7,63 +7,33 @@ import { getRandomInt } from "@/utils/math";
 // redux
 import { RootState } from "../store";
 import initialState from "./initialState";
-import { TBattleResult, TMonster } from "./models";
+import { TBattleResult } from "./models";
+import { fetchBattle, fetchMonsters } from "../services";
 
-const fetchMonsters = createAsyncThunk(
+const fetchMonstersAction = createAsyncThunk(
   "monsters/fetchMonsters",
-  async (): Promise<Array<TMonster>> => {
-    try {
-      const response = await fetch("http://localhost:4000/getMonsters");
-      const dataResponse = await response.json();
-      if (!response.ok) {
-        throw new Error(
-          dataResponse.message || response.statusText || "Connection error"
-        );
-      }
-      return dataResponse.data;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  }
+  fetchMonsters
 );
 
-const fetchBattle = createAsyncThunk<TBattleResult, void, { state: RootState }>(
-  "monsters/fetchBattle",
-  async (_, { getState }): Promise<TBattleResult> => {
-    try {
-      const {
-        monsters: { playerMonsterId, computerMonsterId },
-      } = getState();
-      if (!playerMonsterId || !computerMonsterId) {
-        throw new Error("Missing opponents IDs");
-      }
-      const body = {
-        playerMonsterId,
-        computerMonsterId,
-      };
-      const fetchOptions = {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const response = await fetch(
-        "http://localhost:4000/getWinner",
-        fetchOptions
-      );
-      const dataResponse = await response.json();
-      if (!response.ok) {
-        throw new Error(
-          dataResponse.message || response.statusText || "Connection error"
-        );
-      }
-      return dataResponse.data;
-    } catch (err) {
-      return Promise.reject(err);
-    }
+const fetchBattleAction = createAsyncThunk<
+  TBattleResult,
+  void,
+  { state: RootState }
+>("monsters/fetchBattle", (_, { getState }): Promise<TBattleResult> => {
+  const {
+    monsters: { playerMonsterId, computerMonsterId },
+  } = getState();
+
+  if (!playerMonsterId || !computerMonsterId) {
+    throw new Error("Missing opponents IDs");
   }
-);
+  const body = {
+    playerMonsterId,
+    computerMonsterId,
+  };
+
+  return fetchBattle(body);
+});
 
 const monsterSlice = createSlice({
   name: "monsters",
@@ -84,28 +54,28 @@ const monsterSlice = createSlice({
   extraReducers(builder) {
     builder
       // Monsters List
-      .addCase(fetchMonsters.pending, (state) => {
+      .addCase(fetchMonstersAction.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchMonsters.fulfilled, (state, action) => {
+      .addCase(fetchMonstersAction.fulfilled, (state, action) => {
         state.list = action.payload;
         state.status = "succeeded";
         state.error = null;
       })
-      .addCase(fetchMonsters.rejected, (state, action) => {
+      .addCase(fetchMonstersAction.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "Unknown error";
       })
       // Monsters Battle
-      .addCase(fetchBattle.pending, (state) => {
+      .addCase(fetchBattleAction.pending, (state) => {
         state.fightResult.status = "loading";
       })
-      .addCase(fetchBattle.fulfilled, (state, action) => {
+      .addCase(fetchBattleAction.fulfilled, (state, action) => {
         state.fightResult.status = "succeeded";
         state.fightResult.detail = action.payload;
         state.fightResult.error = null;
       })
-      .addCase(fetchBattle.rejected, (state, action) => {
+      .addCase(fetchBattleAction.rejected, (state, action) => {
         state.fightResult.status = "failed";
         state.fightResult.error = action.error.message || "Unknown error";
       });
@@ -136,5 +106,5 @@ const monsterWinner = ({ monsters }: RootState) => {
 export default monsterSlice.reducer;
 
 export const { setPlayerMonsterId } = monsterSlice.actions;
-export { fetchMonsters, fetchBattle }; // async actions
+export { fetchMonstersAction, fetchBattleAction }; // async actions
 export { selectedPlayerMonsterId, selectedComputerMonsterId, monsterWinner }; // selectors

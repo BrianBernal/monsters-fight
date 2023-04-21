@@ -4,7 +4,7 @@ import { useEffect } from "react";
 // redux
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  fetchMonsters,
+  fetchMonstersAction,
   setPlayerMonsterId,
 } from "@/redux/monsters/monstersSlice";
 
@@ -35,7 +35,7 @@ function MonsterList() {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchMonsters());
+      dispatch(fetchMonstersAction());
     }
   }, []);
 
