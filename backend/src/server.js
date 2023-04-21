@@ -1,6 +1,6 @@
-import express from "express";
-import monsters from "./data.js";
-import calculateWinner from "./utils/calculateWinner.js";
+const express = require("express");
+const { monsters } = require("./data.js");
+const { calculateWinner } = require("./utils/calculateWinner.js");
 
 const app = express();
 const port = 4000;
@@ -54,3 +54,5 @@ app.post("/getWinner", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+console.log(module);

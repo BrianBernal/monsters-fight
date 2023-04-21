@@ -56,4 +56,4 @@ const monsters = [
   },
 ];
 
-export default monsters;
+module.exports = { monsters };
