@@ -1,10 +1,10 @@
 // redux
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { fetchBattleAction } from "@/redux/monsters/monstersSlice";
 import {
-  fetchBattleAction,
   selectedComputerMonsterId,
   selectedPlayerMonsterId,
-} from "@/redux/monsters/monstersSlice";
+} from "@/redux/monsters/selectors";
 
 // components
 import MonsterDetail from "./monsterDetail/MonsterDetail";

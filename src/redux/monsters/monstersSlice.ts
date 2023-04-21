@@ -82,29 +82,7 @@ const monsterSlice = createSlice({
   },
 });
 
-// selectors:
-// Other code such as selectors can use the imported `RootState` type
-const selectedPlayerMonsterId = ({ monsters }: RootState) => {
-  return monsters.list.find(
-    (monster) => monster.id === monsters.playerMonsterId
-  );
-};
-const selectedComputerMonsterId = ({ monsters }: RootState) => {
-  return monsters.list.find(
-    (monster) => monster.id === monsters.computerMonsterId
-  );
-};
-
-const monsterWinner = ({ monsters }: RootState) => {
-  const winner = monsters.list.find((monster) => {
-    return monster.id === monsters.fightResult.detail?.winner.id;
-  });
-
-  return winner;
-};
-
 export default monsterSlice.reducer;
 
 export const { setPlayerMonsterId } = monsterSlice.actions;
 export { fetchMonstersAction, fetchBattleAction }; // async actions
-export { selectedPlayerMonsterId, selectedComputerMonsterId, monsterWinner }; // selectors
