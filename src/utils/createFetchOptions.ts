@@ -11,4 +11,4 @@ function createFetchOptions(method: TMmethod, body = {}, headers = {}) {
   return fetchOptions;
 }
 
-export default createFetchOptions;
+export { createFetchOptions };

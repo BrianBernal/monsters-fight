@@ -1,4 +1,4 @@
-import createFetchOptions from "@/utils/createFetchOptions";
+import { createFetchOptions } from "@/utils/createFetchOptions";
 import { TBattleResult, TMonster } from "./monsters/models";
 
 const URL = "http://localhost:4000";
