@@ -5,16 +5,16 @@ import { TBattleResult, TMonster } from "../redux/monsters/models";
 import {
   ENDPOINTS,
   createFetchOptions,
-  customFetch,
+  fetchJsonBackend,
 } from "@/services/httpUtils";
 
 function fetchMonsters(): Promise<TMonster[]> {
-  return customFetch(ENDPOINTS.getMonsters);
+  return fetchJsonBackend(ENDPOINTS.getMonsters);
 }
 
 function fetchBattle(body: object): Promise<TBattleResult> {
   const fetchOptions = createFetchOptions("POST", body);
-  return customFetch(ENDPOINTS.getBattleResult, fetchOptions);
+  return fetchJsonBackend(ENDPOINTS.getBattleResult, fetchOptions);
 }
 
 export { fetchMonsters, fetchBattle };

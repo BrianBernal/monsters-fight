@@ -18,7 +18,7 @@ function createFetchOptions(method: TMmethod, body = {}, headers = {}) {
   return fetchOptions;
 }
 
-function customFetch(endpoint: string, requestInit?: RequestInit) {
+function fetchJsonBackend(endpoint: string, requestInit?: RequestInit) {
   return fetch(endpoint, requestInit)
     .then((res) => res.json())
     .then((res) => {
@@ -32,4 +32,4 @@ function customFetch(endpoint: string, requestInit?: RequestInit) {
     });
 }
 
-export { ENDPOINTS, createFetchOptions, customFetch };
+export { ENDPOINTS, createFetchOptions, fetchJsonBackend };
