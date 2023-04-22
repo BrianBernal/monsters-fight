@@ -8,7 +8,7 @@ import { getRandomInt } from "@/utils/math";
 import { RootState } from "../store";
 import initialState from "./initialState";
 import { TBattleResult } from "./models";
-import { fetchBattle, fetchMonsters } from "../services";
+import { fetchBattle, fetchMonsters } from "@/services/services";
 
 const fetchMonstersAction = createAsyncThunk(
   "monsters/fetchMonsters",
