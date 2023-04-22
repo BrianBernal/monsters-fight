@@ -8,9 +8,9 @@ import MonsterList from "./MonsterList";
 import { fetchMocker } from "@/utils/setupVitest";
 import initialState from "@/redux/monsters/initialState";
 import { monsters } from "@/utils/mockData";
-import { RootState } from "@/redux/store";
+import { TRootState } from "@/redux/store";
 
-const stateWithMonsterList: RootState = {
+const stateWithMonsterList: TRootState = {
   monsters: { ...initialState, list: monsters, status: "succeeded" },
 };
 

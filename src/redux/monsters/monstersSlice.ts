@@ -5,7 +5,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { getRandomInt } from "@/utils/math";
 
 // redux
-import { RootState } from "../store";
+import { TRootState } from "../store";
 import initialState from "./initialState";
 import { TBattleResult } from "./models";
 import { fetchBattle, fetchMonsters } from "@/services/services";
@@ -18,7 +18,7 @@ const fetchMonstersAction = createAsyncThunk(
 const fetchBattleAction = createAsyncThunk<
   TBattleResult,
   void,
-  { state: RootState }
+  { state: TRootState }
 >("monsters/fetchBattle", (_, { getState }): Promise<TBattleResult> => {
   const {
     monsters: { playerMonsterId, computerMonsterId },
@@ -37,8 +37,7 @@ const fetchBattleAction = createAsyncThunk<
 
 const monsterSlice = createSlice({
   name: "monsters",
-  // `createSlice` will infer the state type from the `initialState` argument
-  initialState,
+  initialState, // `createSlice` will infer the state type from the `initialState` argument
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     setPlayerMonsterId: (state, action: PayloadAction<string>) => {

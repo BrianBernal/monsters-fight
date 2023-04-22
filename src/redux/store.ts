@@ -12,16 +12,16 @@ const rootReducer = combineReducers({
   monsters: monsterSlice,
 });
 
-function setupStore(preloadedState?: PreloadedState<RootState>) {
+function setupStore(preloadedState?: PreloadedState<TRootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
   });
 }
 
-type RootState = ReturnType<typeof rootReducer>;
-type AppStore = ReturnType<typeof setupStore>;
-type AppDispatch = AppStore["dispatch"];
+type TRootState = ReturnType<typeof rootReducer>;
+type TAppStore = ReturnType<typeof setupStore>;
+type TAppDispatch = TAppStore["dispatch"];
 
 export default setupStore;
-export type { RootState, AppStore, AppDispatch };
+export type { TRootState, TAppStore, TAppDispatch };

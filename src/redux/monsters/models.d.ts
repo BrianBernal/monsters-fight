@@ -9,21 +9,21 @@ type TMonster = {
   imageUrl: string;
 };
 
-type requestStatus = "idle" | "loading" | "succeeded" | "failed";
+type TRequestStatus = "idle" | "loading" | "succeeded" | "failed";
 
 type TBattleResult = { winner: TMonster; tie: boolean };
 
 type TInitialState = {
-  status: requestStatus;
+  status: TRequestStatus;
   error: string | null;
   list: TMonster[];
   playerMonsterId: string;
   computerMonsterId: string;
   fightResult: {
-    status: requestStatus;
+    status: TRequestStatus;
     error: string | null;
     detail: TBattleResult | null;
   };
 };
 
-export type { TMonster, TBattleResult, requestStatus, TInitialState };
+export type { TMonster, TBattleResult, TInitialState };

@@ -6,14 +6,14 @@ import type { RenderOptions } from "@testing-library/react";
 import type { PreloadedState } from "@reduxjs/toolkit";
 
 // As a basic setup, import your same slice reducers
-import setupStore, { RootState, AppStore } from "@/redux/store";
+import setupStore, { TRootState, TAppStore } from "@/redux/store";
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
-  preloadedState?: PreloadedState<RootState>;
-  store?: AppStore;
+  preloadedState?: PreloadedState<TRootState>;
+  store?: TAppStore;
 }
 
 function renderWithProviders(

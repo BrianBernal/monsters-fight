@@ -8,11 +8,11 @@ import Home from "./Home";
 
 // utils
 import { fetchMocker } from "@/utils/setupVitest";
-import { RootState } from "@/redux/store";
+import { TRootState } from "@/redux/store";
 import initialState from "@/redux/monsters/initialState";
 import { monsters } from "@/utils/mockData";
 
-const stateLoadedMonsters: RootState = {
+const stateLoadedMonsters: TRootState = {
   monsters: {
     ...initialState,
     list: monsters,
@@ -20,7 +20,7 @@ const stateLoadedMonsters: RootState = {
   },
 };
 
-const stateSelectedMonster: RootState = {
+const stateSelectedMonster: TRootState = {
   monsters: {
     ...initialState,
     list: monsters,
