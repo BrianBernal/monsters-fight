@@ -2,28 +2,19 @@
 import { TBattleResult, TMonster } from "../redux/monsters/models";
 
 // utils
-import { ENDPOINTS } from "@/services/serviceUtils/httpUtils";
 import {
+  ENDPOINTS,
   createFetchOptions,
-  fetchCatchThrowError,
-  fetchResponseToJson,
-  manageBackendResponseData,
-} from "./serviceUtils/fetchUtils";
+  customFetch,
+} from "@/services/httpUtils";
 
-function fetchMonsters(): Promise<Array<TMonster>> {
-  return fetch(ENDPOINTS.getMonsters)
-    .then(fetchResponseToJson)
-    .then(manageBackendResponseData<TMonster[]>)
-    .catch(fetchCatchThrowError);
+function fetchMonsters(): Promise<TMonster[]> {
+  return customFetch(ENDPOINTS.getMonsters);
 }
 
 function fetchBattle(body: object): Promise<TBattleResult> {
   const fetchOptions = createFetchOptions("POST", body);
-
-  return fetch(ENDPOINTS.getBattleResult, fetchOptions)
-    .then(fetchResponseToJson)
-    .then(manageBackendResponseData<TBattleResult>)
-    .catch(fetchCatchThrowError);
+  return customFetch(ENDPOINTS.getBattleResult, fetchOptions);
 }
 
 export { fetchMonsters, fetchBattle };
