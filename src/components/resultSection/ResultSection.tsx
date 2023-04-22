@@ -1,9 +1,9 @@
 // redux
 import { useAppSelector } from "@/redux/hooks";
-import { monsterWinner } from "@/redux/monsters/monstersSlice";
 
 // styles
 import "./resultSection.scss";
+import { monsterWinner } from "@/redux/monsters/selectors";
 
 function ResultSection() {
   const winner = useAppSelector(monsterWinner);
