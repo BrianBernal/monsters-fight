@@ -3,18 +3,18 @@ import { TBattleResult, TMonster } from "../redux/monsters/models";
 
 // utils
 import {
-  ENDPOINTS,
+  SERVICE_URL,
   createFetchOptions,
   fetchJsonBackend,
 } from "@/services/httpUtils";
 
 function fetchMonsters(): Promise<TMonster[]> {
-  return fetchJsonBackend(ENDPOINTS.getMonsters);
+  return fetchJsonBackend(SERVICE_URL.getMonsters);
 }
 
 function fetchBattle(body: object): Promise<TBattleResult> {
   const fetchOptions = createFetchOptions("POST", body);
-  return fetchJsonBackend(ENDPOINTS.getBattleResult, fetchOptions);
+  return fetchJsonBackend(SERVICE_URL.getBattleResult, fetchOptions);
 }
 
 export { fetchMonsters, fetchBattle };

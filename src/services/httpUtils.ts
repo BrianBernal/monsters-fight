@@ -1,6 +1,6 @@
 const BACKEND_HOSTNAME = "http://localhost:4000";
 
-const ENDPOINTS = Object.freeze({
+const SERVICE_URL = Object.freeze({
   getMonsters: `${BACKEND_HOSTNAME}/getMonsters`,
   getBattleResult: `${BACKEND_HOSTNAME}/getWinner`,
 });
@@ -18,8 +18,8 @@ function createFetchOptions(method: TMmethod, body = {}, headers = {}) {
   return fetchOptions;
 }
 
-function fetchJsonBackend(endpoint: string, requestInit?: RequestInit) {
-  return fetch(endpoint, requestInit)
+function fetchJsonBackend(url: string, requestInit?: RequestInit) {
+  return fetch(url, requestInit)
     .then((res) => res.json())
     .then((res) => {
       if (!res.ok) {
@@ -32,4 +32,4 @@ function fetchJsonBackend(endpoint: string, requestInit?: RequestInit) {
     });
 }
 
-export { ENDPOINTS, createFetchOptions, fetchJsonBackend };
+export { SERVICE_URL, createFetchOptions, fetchJsonBackend };
