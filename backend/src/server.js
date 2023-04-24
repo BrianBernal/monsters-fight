@@ -1,12 +1,15 @@
 // libraries
 import express, { json } from "express";
+import dotenv from "dotenv";
 
 // routes
 import monsterRouter from "./routes/monsters.js";
 import fightRouter from "./routes/fight.js";
 
+dotenv.config();
+
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 function allowCrossDomain(_req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

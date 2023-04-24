@@ -1,4 +1,4 @@
-const BACKEND_HOSTNAME = "http://localhost:4000";
+const BACKEND_HOSTNAME = import.meta.env.BACKEND_URL || "http://localhost:4000";
 
 const SERVICE_URL = Object.freeze({
   getMonsters: `${BACKEND_HOSTNAME}/monsters`,
