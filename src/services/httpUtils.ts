@@ -1,11 +1,11 @@
 const BACKEND_HOSTNAME = "http://localhost:4000";
 
 const SERVICE_URL = Object.freeze({
-  getMonsters: `${BACKEND_HOSTNAME}/getMonsters`,
-  getBattleResult: `${BACKEND_HOSTNAME}/getWinner`,
+  getMonsters: `${BACKEND_HOSTNAME}/monsters`,
+  getBattleResult: `${BACKEND_HOSTNAME}/battle`,
 });
 
-type TMmethod = "POST" | "DELETE" | "OPTIONS";
+type TMmethod = "POST" | "PATCH";
 function createFetchOptions(method: TMmethod, body = {}, headers = {}) {
   const fetchOptions = {
     method: method,
