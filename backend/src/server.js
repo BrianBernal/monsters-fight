@@ -1,6 +1,6 @@
-const express = require("express");
-const { monsters } = require("./data.js");
-const { calculateWinner } = require("./utils/calculateWinner.js");
+import express, { json } from "express";
+import { monsters } from "./data.js";
+import { calculateWinner } from "./utils/calculateWinner.js";
 
 const app = express();
 const port = 4000;
@@ -12,10 +12,10 @@ function allowCrossDomain(_req, res, next) {
 }
 
 app.use(allowCrossDomain);
-app.use(express.json());
+app.use(json());
 
 app.get("/", (_req, res) => {
-  res.send("Yes, I am the server and I am alive!");
+  return res.send("Yes, I am the server and I am alive!");
 });
 
 app.get("/getMonsters", (_req, res) => {
@@ -45,14 +45,6 @@ app.post("/getWinner", (req, res) => {
   });
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// app.use((error, req, res, _next) => {
-//   console.log("Error 404 at: ", req.path);
-//   res.status(404).json({ error: "Not found!" });
-// });
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-console.log(module);

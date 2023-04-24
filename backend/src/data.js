@@ -56,4 +56,4 @@ const monsters = [
   },
 ];
 
-module.exports = { monsters };
+export { monsters };

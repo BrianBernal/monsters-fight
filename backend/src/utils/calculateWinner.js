@@ -17,4 +17,4 @@ function calculateWinner(monster1 = {}, monster2 = {}) {
   }
 }
 
-module.exports = { calculateWinner };
+export { calculateWinner };
