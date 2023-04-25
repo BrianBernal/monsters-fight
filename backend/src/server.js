@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 // routes
 import monsterRouter from "./routes/monsters.js";
 import fightRouter from "./routes/fight.js";
+import accountRouter from "./routes/account.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.get("/", (_req, res) => {
 
 app.use("/monsters", monsterRouter);
 app.use("/battle", fightRouter);
+app.use("/account", accountRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
