@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { USERS_BBDD } from "../data.js";
+import { createSuccessfulResponse } from "../utils/responseHelpers.js";
 
 const accountRouter = Router();
 
@@ -17,7 +18,7 @@ accountRouter.get("/:guid", (req, res) => {
 
   if (!user) return res.status(404).send();
 
-  return res.send(user);
+  return res.send(createSuccessfulResponse(user));
 });
 
 // Create new account from guid and name
@@ -28,13 +29,14 @@ accountRouter.post("/", (req, res) => {
 
   const user = USERS_BBDD.find((user) => user.guid === guid);
   if (user) return res.status(409).send();
-
-  USERS_BBDD.push({
+  const newUser = {
     guid,
     name,
-  });
+  };
 
-  return res.send();
+  USERS_BBDD.push(newUser);
+
+  return res.send(createSuccessfulResponse({ newUser }));
 });
 
 // Update account name
@@ -50,7 +52,7 @@ accountRouter.patch("/:guid", (req, res) => {
 
   user.name = name;
 
-  return res.send();
+  return res.send(createSuccessfulResponse({ user }));
 });
 
 // Delete Account
@@ -62,7 +64,7 @@ accountRouter.delete("/:guid", (req, res) => {
 
   USERS_BBDD.splice(userIndex, 1);
 
-  return res.send();
+  return res.send("User deleted successfully.");
 });
 
 export default accountRouter;
