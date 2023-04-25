@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import monsterRouter from "./routes/monsters.js";
 import fightRouter from "./routes/fight.js";
 import accountRouter from "./routes/account.js";
+import authRouter from "./routes/auth.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.get("/", (_req, res) => {
 app.use("/monsters", monsterRouter);
 app.use("/battle", fightRouter);
 app.use("/account", accountRouter);
+app.use("/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
