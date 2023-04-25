@@ -6,7 +6,7 @@ const monsterRouter = express.Router();
 
 // Get monsters list
 monsterRouter.get("", (_req, res) => {
-  return res.json({ data: monsters, ok: true });
+  return res.json(createSuccessfulResponse(monsters));
 });
 
 // Create monster
@@ -50,11 +50,10 @@ monsterRouter.delete("/:monsterId", (req, res) => {
   }
 
   const monsterIndex = monsters.findIndex(
-    (monster) => (monster.id = monsterId)
+    (monster) => monster.id === monsterId
   );
-  if (!monsterIndex) {
-    return res.status(404).send();
-  }
+
+  if (monsterIndex === -1) return res.status(404).send();
 
   monsters.splice(monsterIndex, 1);
   return res.send(createSuccessfulResponse("Monster has been deleted."));

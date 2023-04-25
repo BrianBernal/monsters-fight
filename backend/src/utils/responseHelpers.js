@@ -1,6 +1,6 @@
 function createSuccessfulResponse(data) {
   return {
-    ok: false,
+    ok: true,
     data,
   };
 }
