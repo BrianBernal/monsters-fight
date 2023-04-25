@@ -1,6 +1,7 @@
 // libraries
 import express, { json } from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 // routes
 import monsterRouter from "./routes/monsters.js";
@@ -23,6 +24,7 @@ function allowCrossDomain(_req, res, next) {
 
 app.use(allowCrossDomain);
 app.use(json());
+app.use(cookieParser());
 
 app.get("/", (_req, res) => {
   return res.send("Yes, I am the server and I am alive!");
