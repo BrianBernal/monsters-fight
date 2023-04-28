@@ -47,4 +47,23 @@ authSessionRouter.get("/profile", (req, res) => {
   return res.send(createSuccessfulResponse(safeUser));
 });
 
+authSessionRouter.delete("/logout", (req, res) => {
+  const { sessionId } = req.cookies;
+  if (!sessionId) return res.sendStatus(422);
+
+  const userSession = sessions.find(
+    (session) => session.sessionId === sessionId
+  );
+  if (!userSession) return res.sendStatus(404);
+
+  const userIndex = USERS_BBDD.findIndex(
+    (user) => user.guid === userSession.guid
+  );
+  if (userIndex === -1) return res.status(404).send();
+
+  USERS_BBDD.splice(userIndex, 1);
+
+  return res.send(createSuccessfulResponse("Session has been deleted."));
+});
+
 export default authSessionRouter;
