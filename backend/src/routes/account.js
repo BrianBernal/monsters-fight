@@ -58,13 +58,13 @@ accountRouter.patch("/:guid", (req, res) => {
 // Delete Account
 accountRouter.delete("/:guid", (req, res) => {
   const { guid } = req.params;
-  const userIndex = USERS_BBDD.findIndex((user) => user.guid === guid);
 
+  const userIndex = USERS_BBDD.findIndex((user) => user.guid === guid);
   if (userIndex === -1) return res.status(404).send();
 
   USERS_BBDD.splice(userIndex, 1);
 
-  return res.send("User deleted successfully.");
+  return res.send(createSuccessfulResponse("User deleted successfully."));
 });
 
 export default accountRouter;

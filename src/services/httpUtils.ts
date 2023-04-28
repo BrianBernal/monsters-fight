@@ -20,10 +20,25 @@ function createFetchOptions(method: TMmethod, body = {}, headers = {}) {
 
 function fetchJsonBackend(url: string, requestInit?: RequestInit) {
   return fetch(url, requestInit)
-    .then((res) => res.json())
+    .then((res) => {
+      const dataRes = res.json();
+      const successfulStatus = res.status < 200 && res.status > 299;
+      const dataHasCorrectConvention = "ok" in dataRes && "data" in dataRes;
+
+      if (successfulStatus && dataHasCorrectConvention) {
+        return dataRes;
+      }
+      if (successfulStatus && !dataHasCorrectConvention) {
+        return {
+          ok: true,
+          data: dataRes,
+        };
+      }
+      return dataRes;
+    })
     .then((res) => {
       if (!res.ok) {
-        throw new Error(res.message || res.error || "Connection error");
+        throw Error(res.error || res.message || "Connection error");
       }
       return res.data;
     })
