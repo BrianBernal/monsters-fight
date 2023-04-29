@@ -34,8 +34,8 @@ app.use("/monsters", monsterRouter);
 app.use("/battle", fightRouter);
 app.use("/account", accountRouter);
 app.use("/auth", authRouter);
-app.use("/auth-token", authTokenRouter);
 app.use("/auth-session", authSessionRouter);
+app.use("/auth-token", authTokenRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
